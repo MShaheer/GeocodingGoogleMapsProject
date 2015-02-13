@@ -1,0 +1,80 @@
+﻿@model GeocodingGoogleMap.Models.PropertyDetail
+@{
+    ViewBag.Title = "LocationInfo";
+}
+
+<h2>LocationInfo</h2>
+
+<link rel="stylesheet" type="text/css" href="~/gmap/css/demo.css" />
+<!-- Dependencies: JQuery and GMaps API should be loaded first -->
+<script src="~/gmap/js/jquery-2.1.1.min.js"></script>
+@*<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>*@
+<!-- CSS and JS for our code -->
+<link rel="stylesheet" type="text/css" href="~/gmap/css/jquery-gmaps-latlon-picker.css" />
+<script src="~/gmap/js/jquery-gmaps-latlon-picker.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+
+<h1>Google Maps Latitude and Longitude Picker</h1>
+
+<h2>Editable and selectable Latitude/Longitude values</h2>
+
+
+@using (Html.BeginForm("LocationInfo", "Home", FormMethod.Post))
+{
+
+
+    <fieldset class="gllpLatlonPicker">
+        <input type="text" class="gllpSearchField">
+        <input type="button" class="gllpSearchButton" value="search">
+        <br /><br />
+        <div class="gllpMap">Google Maps</div>
+        <br />
+        lat/lon:
+        <input id="latTxt" type="text" class="gllpLatitude" value="20" />
+        /
+        <input id="longTxt" type="text" class="gllpLongitude" value="20" />
+        zoom: <input id="zoomTxt" type="text" class="gllpZoom" value="3" />
+        <input type="button" class="gllpUpdateButton" value="update map">
+        <br />
+    </fieldset>
+
+         
+    @Html.TextBoxFor(model => model.Address, new { @id = "addressTxt" })
+
+    @Html.TextBoxFor(model => model.City, new { @id = "cityTxt" })
+
+    @Html.TextBoxFor(model => model.State, new { @id = "stateTxt" })
+
+    @Html.TextBoxFor(model => model.Country, new { @id = "countryTxt" })
+
+    <input type="submit" id="submitBtn" value="Post" />
+}
+
+<script>
+
+    $(function () {
+
+        var latitude = $("#latTxt").val();
+        var longitude = $("#longTxt").val();
+        var zoomLevel = $("#zoomTxt").val();
+
+        console.log("Latitude " + latitude);
+        console.log("Longitude " + longitude);
+        console.log("Zoom " + zoomLevel);
+    });
+
+    $('#latTxt').on('input propertychange paste', function () {
+
+        var latitude = $("#latTxt").val();
+        var longitude = $("#longTxt").val();
+        var zoomLevel = $("#zoomTxt").val();
+        console.log("Latitude " + latitude);
+        console.log("Longitude " + longitude);
+        console.log("Zoom " + zoomLevel);
+
+        // "#longTxt", "#zoomTxt"
+    });
+
+</script>
